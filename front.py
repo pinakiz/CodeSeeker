@@ -3,9 +3,8 @@ from dotenv import load_dotenv
 import os
 import requests
 
-# Load env variables (BACK_URL from .env)
 load_dotenv()
-backend = os.getenv("BACK_URL")
+backend = st.secrets["BACK_URL"]  
 API_URL = f"{backend}/search"
 
 st.set_page_config(page_title="CodeSeeker", layout="wide")
