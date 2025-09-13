@@ -1,4 +1,5 @@
 import streamlit as st
+import os
 import requests
 
 backend = os.getenv("BACK_URL")
