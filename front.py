@@ -3,23 +3,29 @@ from dotenv import load_dotenv
 import os
 import requests
 
-load_dotenv()  # loads variables from .env into environment
-
+# Load env variables (BACK_URL from .env)
+load_dotenv()
 backend = os.getenv("BACK_URL")
 API_URL = f"{backend}/search"
 
-
-st.title("Semantic Code Search Engine")
+st.set_page_config(page_title="CodeSeeker", layout="wide")
+st.title(" Semantic Code Search Engine")
 
 query = st.text_input("Enter your query:")
 
 if st.button("Search") and query:
     with st.spinner("Searching..."):
-        response = requests.get(API_URL, params={"q": query, "k": 5})
-        results = response.json()
-        
-        for i, func in enumerate(results, 1):
-            st.markdown(f"### {i}. {func['name']}  `({func['repo']})`")
-            st.code(func["code"], language="python")
-            if func["docstring"]:
-                st.markdown(f"**Docstring:** {func['docstring']} {func['warning']}")
+        try:
+            response = requests.get(API_URL, params={"q": query, "k": 5}, timeout=30)
+            response.raise_for_status()
+            results = response.json()
+
+            for i, func in enumerate(results, 1):
+                st.markdown(f"### {i}. {func['name']}  `({func['repo']})`")
+                st.code(func["code"], language="python")
+                if func.get("docstring"):
+                    st.markdown(f"**Docstring:** {func['docstring']}")
+                if func.get("warning"):
+                    st.warning(func["warning"] + f" (distance={func['distance']:.2f})")
+        except Exception as e:
+            st.error(f"❌ Error: {e}")

@@ -17,28 +17,24 @@ FILES = {
     "index": "data/code.index"
 }
 
-# Download from Hugging Face
+# Download from Hugging Face (Render caches this after first time)
 VECTOR_FILE = hf_hub_download(repo_id=REPO_ID, filename=FILES["vectors"])
 MAPPING_FILE = hf_hub_download(repo_id=REPO_ID, filename=FILES["metadata"])
 INDEX_FILE = hf_hub_download(repo_id=REPO_ID, filename=FILES["index"])
 
 # ---------- Load Models & Data ----------
-# Load vectors
 vectors = np.load(VECTOR_FILE).astype("float32")
 dim = vectors.shape[1]
 
-# Load FAISS index
 index = faiss.read_index(INDEX_FILE)
 
-# Load mapping (metadata for functions)
 with open(MAPPING_FILE, "r") as f:
     functions = json.load(f)
 
-# Load embedding model
 model = SentenceTransformer("sentence-transformers/multi-qa-mpnet-base-dot-v1")
 
 # ---------- Config ----------
-DISTANCE_THRESHOLD = 25  # tune this value
+DISTANCE_THRESHOLD = 25  # smaller = stricter filtering
 
 # ---------- FastAPI Setup ----------
 app = FastAPI(title="Semantic Code Search Engine")
@@ -57,10 +53,8 @@ def search(
     q: str = Query(..., description="Your natural language query"),
     k: int = Query(5, description="Number of results to return")
 ):
-    # Encode query into vector
     q_vec = model.encode(q).astype("float32").reshape(1, -1)
 
-    # Search FAISS
     distances, indices = index.search(q_vec, k)
 
     results = []
