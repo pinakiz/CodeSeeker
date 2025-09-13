@@ -1,9 +1,13 @@
 import streamlit as st
+from dotenv import load_dotenv
 import os
 import requests
 
+load_dotenv()  # loads variables from .env into environment
+
 backend = os.getenv("BACK_URL")
 API_URL = f"{backend}/search"
+
 
 st.title("Semantic Code Search Engine")
 
