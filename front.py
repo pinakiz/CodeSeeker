@@ -1,7 +1,7 @@
 import streamlit as st
 import requests
 
-backend = os.getenv("API_KEY")
+backend = os.getenv("BACK_URL")
 API_URL = f"{backend}/search"
 
 st.title("Semantic Code Search Engine")
