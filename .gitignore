@@ -1,0 +1,13 @@
+# Ignore virtual environment
+myenv/
+
+# Ignore Python bytecode
+__pycache__/
+*.py[cod]
+
+# Ignore Jupyter checkpoints (if any)
+.ipynb_checkpoints/
+
+# Ignore editor settings (optional)
+.vscode/
+.idea/
