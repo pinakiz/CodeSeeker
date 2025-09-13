@@ -1,8 +1,6 @@
 import streamlit as st
 import os
 import requests
-
-load_dotenv()
 backend = st.secrets["BACK_URL"]  
 API_URL = f"{backend}/search"
 
