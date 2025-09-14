@@ -98,7 +98,7 @@ Now open `http://localhost:8501` and try natural language queries like:
 
 ---
 
-## 🔗 Resources
+## 🔗 Checkout experiments and (Embeddings + Index)
 
 * 📘 **Kaggle Notebook** (training & evaluation): [https://www.kaggle.com/code/pinakiz/codeseeker](https://www.kaggle.com/code/pinakiz/codeseeker)
 * 🤗 **Hugging Face Repo** (embeddings + index): [https://huggingface.co/pinakiz/codeSeeker](https://huggingface.co/pinakiz/codeSeeker)
