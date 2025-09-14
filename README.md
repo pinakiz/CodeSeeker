@@ -2,6 +2,11 @@
 
 CodeSeeker is a system that lets developers search **large Python codebases** using **natural language queries** — retrieving functions by meaning, not just keywords.
 
+
+
+https://github.com/user-attachments/assets/8da88ecc-c2a4-45dc-b243-5b02969429bc
+
+
 ---
 
 ## 🚀 Features
